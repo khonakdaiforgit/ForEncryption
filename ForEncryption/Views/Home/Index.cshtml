@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Secure Chat Encryption";
+}
+
+<h1 class="mb-4 text-center p-4">** ForEncryption **</h1>
+
+<div class="container mt-5">
+    <!-- Introduction -->
+    <h1 class="text-center mb-4">Secure Chat and File Encryption</h1>
+    <p class="lead text-center mb-5">
+        Welcome to our secure communication platform! This website provides tools to encrypt and decrypt messages for safe sharing on social media, as well as a Windows application for encrypting and decrypting files. Protect your privacy with easy-to-use encryption solutions.
+    </p>
+
+    <!-- Sections Overview -->
+    <div class="row g-4">
+        <!-- Message Encryption Section -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h2 class="card-title">Message Encryption</h2>
+                    <p class="card-text">
+                        Encrypt your text messages using a shared key to ensure secure communication over social media platforms. Simply enter your message (up to 1000 characters), provide an encryption key, and copy the encrypted text to share with your recipient.
+                    </p>
+                    <p class="card-text">
+                        <strong>Use Case:</strong> Ideal for private conversations on platforms like X, WhatsApp, or Telegram, where you want to protect sensitive information from unauthorized access.
+                    </p>
+                    <div class="mt-auto text-center">
+                        <a asp-controller="Home" asp-action="Encrypt" class="btn btn-primary">Go to Message Encryption</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Decryption Section -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h2 class="card-title">Message Decryption</h2>
+                    <p class="card-text">
+                        Decrypt messages received from others by pasting the encrypted text and entering the shared key. This tool reveals the original message securely and instantly.
+                    </p>
+                    <p class="card-text">
+                        <strong>Use Case:</strong> Perfect for recipients who need to read encrypted messages sent via social media, ensuring only those with the correct key can access the content.
+                    </p>
+                    <div class="mt-auto text-center">
+                        <a asp-controller="Home" asp-action="Decrypt" class="btn btn-primary">Go to Message Decryption</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Encryption/Decryption Section -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h2 class="card-title">File Encryption/Decryption</h2>
+                    <p class="card-text">
+                        Secure your files with our dedicated Windows application. Download the program to encrypt or decrypt files using a key, ensuring your sensitive data remains protected during storage or transfer.
+                    </p>
+                    <p class="card-text">
+                        <strong>Use Case:</strong> Best for securing documents, images, or other files before sharing via email, cloud storage, or physical drives, protecting them from unauthorized access.
+                    </p>
+                    <div class="mt-auto text-center">
+                        <a href="/downloads/SecureFileEncryptor.exe" class="btn btn-primary" target="_blank">Download Windows App</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
