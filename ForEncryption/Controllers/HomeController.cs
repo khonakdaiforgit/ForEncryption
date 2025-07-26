@@ -2,8 +2,6 @@
 using ForEncryption.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace ForEncryption.Controllers
 {
@@ -18,18 +16,18 @@ namespace ForEncryption.Controllers
             _logger = logger;
             _dataEncryption = dataEncryption;
         }
-
-        public IActionResult Index()
+        //https://localhost:7114/?pass=1146
+        public IActionResult Index(int pass)
         {
-            //var xx=encryption.Encrypt("فردا باید بریم به مدار 576 برای تجدید قوا");
-            //EncryptionTool.DataEncryption encryption = new EncryptionTool.DataEncryption("asd");
-            //var xx = encryption.Encrypt("Simple IV for demo; in production, use a random IV");
-
-            //var dexx = encryption.Decrypt(xx);
-            //DecryptionViewModel encryptionModel = new DecryptionViewModel();
-            return View();
+            //if (pass == 1146)
+                return View();
+            //else return Content("Access dined !");
         }
 
+        public IActionResult Donation()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -41,6 +39,7 @@ namespace ForEncryption.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [HttpGet]
         public IActionResult Encrypt()
         {
             return View(new EncryptionVIewModel());
@@ -48,14 +47,14 @@ namespace ForEncryption.Controllers
 
         // POST: Handle encryption
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Encrypt(EncryptionVIewModel model)
         {
-            if (!string.IsNullOrEmpty(model.PlainText) && !string.IsNullOrEmpty(model.EncryptionKey))
+            if (ModelState.IsValid &&
+                !string.IsNullOrEmpty(model.PlainText) && !string.IsNullOrEmpty(model.EncryptionKey))
             {
                 try
                 {
-
-                    // model.EncryptedText = EncryptText(model.PlainText, model.EncryptionKey);
                     model.EncryptedText = _dataEncryption.Encrypt(model.PlainText, model.EncryptionKey);
 
                 }
@@ -67,20 +66,21 @@ namespace ForEncryption.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Decrypt()
         {
             return View(new DecryptionViewModel());
         }
 
-        // POST: Handle decryption
         [HttpPost]
-        public IActionResult Decrypt(DecryptionViewModel model)
+        [ValidateAntiForgeryToken]
+        public IActionResult Decrypt([FromForm] DecryptionViewModel model)
         {
-            if (!string.IsNullOrEmpty(model.EncryptedText) && !string.IsNullOrEmpty(model.EncryptionKey))
+            if (ModelState.IsValid &&
+                !string.IsNullOrEmpty(model.EncryptedText) && !string.IsNullOrEmpty(model.EncryptionKey))
             {
                 try
                 {
-                    //model.DecryptedText = DecryptText(model.EncryptedText, model.EncryptionKey);
                     model.DecryptedText = _dataEncryption.Decrypt(model.EncryptedText, model.EncryptionKey);
                 }
                 catch
@@ -90,48 +90,9 @@ namespace ForEncryption.Controllers
             }
             return View(model);
         }
-
-        // Encrypts text using AES
-        private string EncryptText(string plainText, string key)
+        public IActionResult Application()
         {
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = Encoding.UTF8.GetBytes(key.PadRight(32).Substring(0, 32));
-                aes.IV = new byte[16]; // Zero IV for simplicity
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter sw = new StreamWriter(cs))
-                        {
-                            sw.Write(plainText);
-                        }
-                    }
-                    return Convert.ToBase64String(ms.ToArray());
-                }
-            }
-        }
-
-        // Decrypts text using AES
-        private string DecryptText(string encryptedText, string key)
-        {
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = Encoding.UTF8.GetBytes(key.PadRight(32).Substring(0, 32));
-                aes.IV = new byte[16]; // Zero IV for simplicity
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(encryptedText)))
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
-                    {
-                        using (StreamReader sr = new StreamReader(cs))
-                        {
-                            return sr.ReadToEnd();
-                        }
-                    }
-                }
-            }
+            return View();
         }
     }
 }

@@ -74,6 +74,7 @@
             Controls.Add(btnShowPass);
             Controls.Add(btnSetPassword);
             Controls.Add(txtPassword);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "frmSetPassword";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Set Password";

@@ -83,6 +83,9 @@ namespace SecureFileEncryptor
                 }
 
                 MessageBox.Show($"File encrypted successfully and saved as: {outputFilePath}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Properties.Settings.Default.UsageCount++;
+                Properties.Settings.Default.Save();
             }
             catch (Exception ex)
             {
@@ -177,6 +180,9 @@ namespace SecureFileEncryptor
                 File.WriteAllBytes(outputFilePath, fileData);
 
                 MessageBox.Show($"File decrypted successfully and saved as: {outputFilePath}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Properties.Settings.Default.UsageCount++;
+                Properties.Settings.Default.Save();
             }
             catch (CryptographicException ex)
             {

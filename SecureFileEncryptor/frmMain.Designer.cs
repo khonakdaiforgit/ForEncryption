@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             gbFileEncryption = new GroupBox();
             btnStartEncryption = new Button();
             btnSetPasswordForEncrypt = new Button();
@@ -39,9 +40,12 @@
             menuStrip1 = new MenuStrip();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             forEncryptionWebsiteToolStripMenuItem = new ToolStripMenuItem();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabelFreeUsage = new ToolStripStatusLabel();
             gbFileEncryption.SuspendLayout();
             gbFileDecryption.SuspendLayout();
             menuStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // gbFileEncryption
@@ -165,23 +169,47 @@
             forEncryptionWebsiteToolStripMenuItem.Name = "forEncryptionWebsiteToolStripMenuItem";
             forEncryptionWebsiteToolStripMenuItem.Size = new Size(193, 22);
             forEncryptionWebsiteToolStripMenuItem.Text = "ForEncryption Website";
+            forEncryptionWebsiteToolStripMenuItem.Click += forEncryptionWebsiteToolStripMenuItem_Click;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelFreeUsage });
+            statusStrip1.Location = new Point(0, 343);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(526, 22);
+            statusStrip1.SizingGrip = false;
+            statusStrip1.TabIndex = 5;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabelFreeUsage
+            // 
+            toolStripStatusLabelFreeUsage.Name = "toolStripStatusLabelFreeUsage";
+            toolStripStatusLabelFreeUsage.Size = new Size(146, 17);
+            toolStripStatusLabelFreeUsage.Text = "The amount of free usage ";
             // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(526, 365);
+            Controls.Add(statusStrip1);
             Controls.Add(gbFileDecryption);
             Controls.Add(gbFileEncryption);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Secure File Encryptor";
+            Load += frmMain_Load;
             gbFileEncryption.ResumeLayout(false);
             gbFileDecryption.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -199,5 +227,7 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem forEncryptionWebsiteToolStripMenuItem;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripStatusLabelFreeUsage;
     }
 }

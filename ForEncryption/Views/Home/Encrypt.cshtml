@@ -13,15 +13,16 @@
         <div class="card">
             <div class="card-body">
                 <form asp-action="Encrypt" method="post">
+                    @Html.AntiForgeryToken()
                     <div class="mb-3">
                         <label for="PlainText" class="form-label">Message to Encrypt:</label>
                         <textarea id="PlainText" name="PlainText" class="form-control" rows="4" placeholder="Enter your message (up to 3 paragraphs)">@Model.PlainText</textarea>
                     </div>
-                    <div class="mb-3">
+              @*       <div class="mb-3">
                         <button type="button" onclick="pasteText('PlainText')" class="btn btn-secondary">
                             <i class="fas fa-paste me-2"></i>Paste
                         </button>
-                    </div>
+                    </div> *@
                     <div class="mb-3">
                         <label for="EncryptionKey" class="form-label">Encryption Key:</label>
                         <input type="text" id="EncryptionKey" name="EncryptionKey" value="@Model.EncryptionKey" class="form-control" placeholder="Enter encryption key" />
@@ -36,12 +37,13 @@
                     <div class="mt-3">
                         <label class="form-label">Encrypted Text:</label>
                         <textarea id="EncryptedText" class="form-control" rows="4" readonly>@Model.EncryptedText</textarea>
-                        <div class="d-flex justify-content-center align-items-center">
+                     @*    <div class="d-flex justify-content-center align-items-center">
                             <button type="button" onclick="copyText('EncryptedText')" class="btn btn-success mt-2">
-                                <i class="fas fa-copy me-2"></i>Copy Encrypted Text
+                                <i class="fas fa-copy me-2"></i>
+                                <span id="btnCopy" >Copy Encrypted Text</span>
                             </button>
 
-                        </div>
+                        </div> *@
                     </div>
                 }
             </div>
@@ -67,7 +69,7 @@
         function copyText(elementId) {
             var text = document.getElementById(elementId).value;
             navigator.clipboard.writeText(text).then(() => {
-                alert('Text copied to clipboard!');
+                document.getElementById('btnCopy').innerText = "Copied !";
             });
         }
 

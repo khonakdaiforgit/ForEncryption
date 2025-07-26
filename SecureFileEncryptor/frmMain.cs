@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace SecureFileEncryptor
 {
     public partial class frmMain : Form
@@ -14,6 +16,9 @@ namespace SecureFileEncryptor
 
         private void btnSelectMainFile_Click(object sender, EventArgs e)
         {
+            if (!Program.CheckLimitation())
+            { return; }
+
             selectedFilePath = null;
             // Create an instance of OpenFileDialog
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -59,6 +64,9 @@ namespace SecureFileEncryptor
 
         private void btnSelectEncryptedFile_Click(object sender, EventArgs e)
         {
+            if (!Program.CheckLimitation())
+            { return; }
+
             selectedFilePath = null;
             // Create an instance of OpenFileDialog
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -99,6 +107,29 @@ namespace SecureFileEncryptor
         private void btnStartDecryption_Click(object sender, EventArgs e)
         {
             FileEncryptor.DecryptFile(selectedFilePath, Password);
+        }
+
+        private void forEncryptionWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string url = Program.WebsiteUrl;
+
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true // Required to open the URL in the default browser
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to open link: " + ex.Message);
+            }
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            toolStripStatusLabelFreeUsage.Text = $"The amount of free usage is {Program.FreeUsingCount} times.";
         }
     }
 }
