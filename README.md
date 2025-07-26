@@ -1,16 +1,17 @@
 # Secure Message & File Encryptor with ForEncryption
 
-A .NET 8 solution for secure file encryption and decryption, featuring both a Windows Forms application and an ASP.NET Core web interface.
+A .NET 8 solution for secure encryption and decryption, featuring both a Windows Forms application for files and an ASP.NET Core web interface for messages.
 
 ## Projects
 
 - **SecureFileEncryptor**: A Windows Forms application for encrypting and decrypting files with password protection.
-- **ForEncryption**: An ASP.NET Core MVC web application for file encryption and decryption via a web interface.
+- **ForEncryption**: An ASP.NET Core MVC web application for encrypting and decrypting messages via a web interface.
 
 ## Features
 
-- Strong file encryption and decryption
-- Password protection for sensitive files & Message
+- Strong file encryption and decryption (Windows app)
+- Secure message encryption and decryption (Web app)
+- Password protection for sensitive files and messages
 - User-friendly Windows Forms and web interfaces
 - .NET 8 support
 
@@ -39,7 +40,7 @@ A .NET 8 solution for secure file encryption and decryption, featuring both a Wi
 ## Usage
 
 - Use the Windows Forms app to encrypt/decrypt files locally.
-- Use the web app to encrypt/decrypt message through your browser.
+- Use the web app to encrypt/decrypt messages through your browser.
 
 ## Contributing
 
